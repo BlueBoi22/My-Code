@@ -21,9 +21,9 @@ public class Student {
         Student firstStudent = new Student();
         Student secondStudent = new Student ();
         firstStudent.id = 1;
-        firstStudent.firstName = "Marc";
+        firstStudent.firstName = "Marc the Narc";
         secondStudent.id = 2;
-        secondStudent.firstName = "Sophie";
+        secondStudent.firstName = "Sophie (Julius 'girlfriend')";
     
         System.out.println("The student object referred to by the variable secondStudent has the first name: " + secondStudent.firstName);
     }
