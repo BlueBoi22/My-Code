@@ -28,4 +28,3 @@ public class Student {
         System.out.println("The student object referred to by the variable secondStudent has the first name: " + secondStudent.firstName);
     }
     }
-
