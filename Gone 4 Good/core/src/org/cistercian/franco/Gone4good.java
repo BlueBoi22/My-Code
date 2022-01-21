@@ -22,25 +22,26 @@ public class Gone4good extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		items = new Texture("Gone 4 Good.png");
-		billHud = new TextureRegion(items, 0, 0, 46,46);
-		billHead = new TextureRegion(items, 46, 0, 46, 46);
-		billStanding = new TextureRegion(items, 138, 0, 46, 46);
-		billWalking = new Animation(0.2f, new TextureRegion(items, 138, 0, 46, 46), new TextureRegion(items, 184, 0, 46, 46));
-		billShooting = new Animation(.02f, new TextureRegion(items, 0, 46, 46, 46), new TextureRegion(items, 46, 46, 46, 46), new TextureRegion(items, 92, 46, 46, 46), new TextureRegion(items, 138, 46, 46, 46));
-		billShootWalk = new Animation(0.2f, new TextureRegion(items, 184, 46, 46, 46), new TextureRegion(items, 0, 92, 46, 46), new TextureRegion(items, 46, 92, 46, 46), new TextureRegion(items, 46, 138, 46, 46));
+		billHud = new TextureRegion(items, 0, 0, 184,184);
+		billHead = new TextureRegion(items, 184, 0, 184, 184);
+		billStanding = new TextureRegion(items, 550, 0, 184, 184);
+		billWalking = new Animation(0.2f, new TextureRegion(items, 550, 0, 184, 184), new TextureRegion(items, 736, 0, 184, 184));
+		billShooting = new Animation(.02f, new TextureRegion(items, 0, 184, 184, 184), new TextureRegion(items, 184, 184, 184, 184), new TextureRegion(items, 368, 184, 184, 184), new TextureRegion(items, 552, 184, 184, 184));
+		billShootWalk = new Animation(0.2f, new TextureRegion(items, 736, 184, 184, 184), new TextureRegion(items, 0, 368, 184, 184), new TextureRegion(items, 184, 368, 184, 184), new TextureRegion(items, 184, 552, 184, 184));
 	}
 
 	@Override
 	public void render () {
 		ScreenUtils.clear(1, 0, 0, 1);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		batch.draw(billStanding, 875, 450);
+		batch.draw(billHud, 0, 0);
 		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+		items.dispose();
 	}
 }
