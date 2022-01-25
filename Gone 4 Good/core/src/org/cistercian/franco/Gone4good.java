@@ -15,8 +15,9 @@ public class Gone4good extends ApplicationAdapter {
 	TextureRegion billHead;
 	TextureRegion billStanding;
 	Animation billWalking;
-	Animation billShooting;
+	Animation billShootingStart;
 	Animation billShootWalk;
+	Animation billShootContinue;
 	
 	@Override
 	public void create () {
@@ -26,7 +27,8 @@ public class Gone4good extends ApplicationAdapter {
 		billHead = new TextureRegion(items, 184, 0, 184, 184);
 		billStanding = new TextureRegion(items, 550, 0, 184, 184);
 		billWalking = new Animation(0.2f, new TextureRegion(items, 550, 0, 184, 184), new TextureRegion(items, 736, 0, 184, 184));
-		billShooting = new Animation(.02f, new TextureRegion(items, 0, 184, 184, 184), new TextureRegion(items, 184, 184, 184, 184), new TextureRegion(items, 368, 184, 184, 184), new TextureRegion(items, 552, 184, 184, 184));
+		billShootingStart = new Animation(.02f, new TextureRegion(items, 0, 184, 184, 184), new TextureRegion(items, 184, 184, 184, 184), new TextureRegion(items, 368, 184, 184, 184), new TextureRegion(items, 552, 184, 184, 184));
+		billShootContinue = new Animation(.02f, new TextureRegion(items, 368, 184, 184, 184), new TextureRegion(items, 552, 184, 184, 184));
 		billShootWalk = new Animation(0.2f, new TextureRegion(items, 736, 184, 184, 184), new TextureRegion(items, 0, 368, 184, 184), new TextureRegion(items, 184, 368, 184, 184), new TextureRegion(items, 184, 552, 184, 184));
 	}
 
@@ -36,9 +38,11 @@ public class Gone4good extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(billStanding, 875, 450);
 		batch.draw(billHud, 0, 0);
+		batch.draw(billShootWalk.getKeyFrame(30, 0));
 		batch.end();
 	}
-	
+
+
 	@Override
 	public void dispose () {
 		batch.dispose();
