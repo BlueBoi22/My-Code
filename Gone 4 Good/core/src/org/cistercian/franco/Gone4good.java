@@ -3,6 +3,10 @@ package org.cistercian.franco;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -18,6 +22,8 @@ public class Gone4good extends ApplicationAdapter {
 	Animation billShootingStart;
 	Animation billShootWalk;
 	Animation billShootContinue;
+	int x = 875;
+	int y = 450;
 	
 	@Override
 	public void create () {
@@ -36,11 +42,14 @@ public class Gone4good extends ApplicationAdapter {
 	public void render () {
 		ScreenUtils.clear(1, 0, 0, 1);
 		batch.begin();
-		batch.draw(billStanding, 875, 450);
+		batch.draw(billStanding, x, y);
 		batch.draw(billHud, 0, 0);
-		batch.draw(billShootWalk.getKeyFrame(30, 0));
+		batch.draw(billHead, x-50, y+83);
 		batch.end();
+		if (Gdx.input.isKeyPressed(Input.Keys.W)){
+		y += 10;
 	}
+}
 
 
 	@Override
