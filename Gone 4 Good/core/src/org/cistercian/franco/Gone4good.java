@@ -19,6 +19,7 @@ public class Gone4good extends ApplicationAdapter {
 	TextureRegion billHud;
 	TextureRegion billHead;
 	TextureRegion billStanding;
+	TextureRegion baseTile;
 	TextureRegion corner;
 	Animation billWalking;
 	Animation billShootingStart;
@@ -35,11 +36,13 @@ public class Gone4good extends ApplicationAdapter {
 		billHud = new TextureRegion(items, 0, 0, 184,184);
 		billHead = new TextureRegion(items, 184, 0, 184, 184);
 		billStanding = new TextureRegion(items, 550, 0, 184, 184);
-		corner = new TextureRegion(background, 690, 690, 460, 460);
+		baseTile = new TextureRegion(background, 0, 0, 460, 460);
+		corner = new TextureRegion(background, 460, 460, 460, 460);
 		billWalking = new Animation(0.2f, new TextureRegion(items, 550, 0, 184, 184), new TextureRegion(items, 736, 0, 184, 184));
 		billShootingStart = new Animation(.02f, new TextureRegion(items, 0, 184, 184, 184), new TextureRegion(items, 184, 184, 184, 184), new TextureRegion(items, 368, 184, 184, 184), new TextureRegion(items, 552, 184, 184, 184));
 		billShootContinue = new Animation(.02f, new TextureRegion(items, 368, 184, 184, 184), new TextureRegion(items, 552, 184, 184, 184));
 		billShootWalk = new Animation(0.2f, new TextureRegion(items, 736, 184, 184, 184), new TextureRegion(items, 0, 368, 184, 184), new TextureRegion(items, 184, 368, 184, 184), new TextureRegion(items, 184, 552, 184, 184));
+	System.out.println(background.getWidth());
 	}
 
 	
@@ -47,12 +50,12 @@ public class Gone4good extends ApplicationAdapter {
 	public void render () {
 		ScreenUtils.clear(1, 0, 0, 1);
 		batch.begin();
-		batch.draw(billStanding, x, y);
-		batch.draw(billHud, 0, 0);
-		batch.draw(corner, 10, 60);
+		batch.draw(corner, 0, 0);
 		if (Gdx.input.isKeyPressed(Input.Keys.W)){
 			y += 10;
 		}
+		batch.draw(billStanding, x, y);
+		batch.draw(billHud, 0, 0);
 		batch.draw(billHead, x-50, y+83);
 		batch.end();
 	}
