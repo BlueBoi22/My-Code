@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.math.MathUtils;
 
 public class Gone4good extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -20,13 +21,16 @@ public class Gone4good extends ApplicationAdapter {
 	TextureRegion billHead;
 	TextureRegion billStanding;
 	TextureRegion baseTile;
-	TextureRegion corner;
+	TextureRegion botleftcorner;
+	
 	Animation billWalking;
 	Animation billShootingStart;
 	Animation billShootWalk;
 	Animation billShootContinue;
-	int x = 875;
-	int y = 450;
+	int x = 0;
+	int y = 0;
+	
+
 	
 	@Override
 	public void create () {
@@ -37,7 +41,7 @@ public class Gone4good extends ApplicationAdapter {
 		billHead = new TextureRegion(items, 184, 0, 184, 184);
 		billStanding = new TextureRegion(items, 550, 0, 184, 184);
 		baseTile = new TextureRegion(background, 0, 0, 460, 460);
-		corner = new TextureRegion(background, 460, 460, 460, 460);
+		botleftcorner = new TextureRegion(background, 460, 460, 460, 460);
 		billWalking = new Animation(0.2f, new TextureRegion(items, 550, 0, 184, 184), new TextureRegion(items, 736, 0, 184, 184));
 		billShootingStart = new Animation(.02f, new TextureRegion(items, 0, 184, 184, 184), new TextureRegion(items, 184, 184, 184, 184), new TextureRegion(items, 368, 184, 184, 184), new TextureRegion(items, 552, 184, 184, 184));
 		billShootContinue = new Animation(.02f, new TextureRegion(items, 368, 184, 184, 184), new TextureRegion(items, 552, 184, 184, 184));
@@ -50,16 +54,18 @@ public class Gone4good extends ApplicationAdapter {
 	public void render () {
 		ScreenUtils.clear(1, 0, 0, 1);
 		batch.begin();
-		batch.draw(corner, 0, 0);
+		batch.draw(botleftcorner, x, y);
 		if (Gdx.input.isKeyPressed(Input.Keys.W)){
-			y += 10;
+			y -= 10;
 		}
-		batch.draw(billStanding, x, y);
+		batch.draw(billStanding, 875, 450);
 		batch.draw(billHud, 0, 0);
-		batch.draw(billHead, x-50, y+83);
+		int mouseposx = Gdx.input.getX();
+		int mouseposy = Gdx.input.getY();
+		float angle = MathUtils.atan2(mouseposy-, mouseposx-);
+		batch.draw(billHead, 825, 433, 0, 0, 46, 46, 4, 4, angle);
 		batch.end();
 	}
-
 
 	@Override
 	public void dispose () {
