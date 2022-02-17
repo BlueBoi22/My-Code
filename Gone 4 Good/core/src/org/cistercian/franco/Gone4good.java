@@ -62,8 +62,10 @@ public class Gone4good extends ApplicationAdapter {
 		batch.draw(billHud, 0, 0);
 		int mouseposx = Gdx.input.getX();
 		int mouseposy = Gdx.input.getY();
-		float angle = MathUtils.atan2(mouseposy-, mouseposx-);
-		batch.draw(billHead, 825, 433, 0, 0, 46, 46, 4, 4, angle);
+		float angle = MathUtils.atan2(825 - mouseposy, mouseposx - 533);
+		float degrees = (float) (180.0 * angle / Math.PI);
+		System.out.println(degrees + ", " + mouseposx + ", " + mouseposy);
+		batch.draw(billHead, 825, 533, 23,23, 46, 46, 4, 4, degrees);
 		batch.end();
 	}
 
