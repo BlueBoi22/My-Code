@@ -12,9 +12,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import java.awt.*;
+
 
 public class Gone4good extends ApplicationAdapter {
 	SpriteBatch batch;
+	OrthographicCamera camera;
 	Texture items;
 	Texture background;
 	TextureRegion billHud;
@@ -22,16 +26,12 @@ public class Gone4good extends ApplicationAdapter {
 	TextureRegion billStanding;
 	TextureRegion baseTile;
 	TextureRegion botleftcorner;
-	
 	Animation billWalking;
 	Animation billShootingStart;
 	Animation billShootWalk;
 	Animation billShootContinue;
 	int x = 0;
 	int y = 0;
-	
-
-	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -46,7 +46,6 @@ public class Gone4good extends ApplicationAdapter {
 		billShootingStart = new Animation(.02f, new TextureRegion(items, 0, 184, 184, 184), new TextureRegion(items, 184, 184, 184, 184), new TextureRegion(items, 368, 184, 184, 184), new TextureRegion(items, 552, 184, 184, 184));
 		billShootContinue = new Animation(.02f, new TextureRegion(items, 368, 184, 184, 184), new TextureRegion(items, 552, 184, 184, 184));
 		billShootWalk = new Animation(0.2f, new TextureRegion(items, 736, 184, 184, 184), new TextureRegion(items, 0, 368, 184, 184), new TextureRegion(items, 184, 368, 184, 184), new TextureRegion(items, 184, 552, 184, 184));
-	System.out.println(background.getWidth());
 	}
 
 	
@@ -54,9 +53,21 @@ public class Gone4good extends ApplicationAdapter {
 	public void render () {
 		ScreenUtils.clear(1, 0, 0, 1);
 		batch.begin();
+		Gdx.graphics.getWidth();
+		Gdx.graphics.getHeight();
 		batch.draw(botleftcorner, x, y);
+		batch.draw(baseTile, x + 200, y + 200);
 		if (Gdx.input.isKeyPressed(Input.Keys.W)){
 			y -= 10;
+		}
+		else if (Gdx.input.isKeyPressed(Input.Keys.S)){
+			y += 10;
+		}
+		else if (Gdx.input.isKeyPressed(Input.Keys.A)){
+			x += 10;
+		}
+		else if (Gdx.input.isKeyPressed(Input.Keys.D)){
+			x -= 10;
 		}
 		batch.draw(billStanding, 875, 450);
 		batch.draw(billHud, 0, 0);
@@ -64,8 +75,7 @@ public class Gone4good extends ApplicationAdapter {
 		int mouseposy = Gdx.input.getY();
 		float angle = MathUtils.atan2(825 - mouseposy, mouseposx - 533);
 		float degrees = (float) (180.0 * angle / Math.PI);
-		System.out.println(degrees + ", " + mouseposx + ", " + mouseposy);
-		batch.draw(billHead, 825, 533, 23,23, 46, 46, 4, 4, degrees);
+		batch.draw(billHead, 895, 602, 23,23, 46, 46, 4, 4, degrees);
 		batch.end();
 	}
 
