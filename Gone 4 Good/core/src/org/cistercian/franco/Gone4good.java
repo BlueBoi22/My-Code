@@ -24,8 +24,18 @@ public class Gone4good extends ApplicationAdapter {
 	TextureRegion billHud;
 	TextureRegion billHead;
 	TextureRegion billStanding;
-	TextureRegion baseTile;
+	TextureRegion baseTile1;
+	TextureRegion baseTile2;
+	TextureRegion baseTile3;
+	TextureRegion baseTile4;
+	TextureRegion wallTile1;
+	TextureRegion wallTile2;
+	TextureRegion wallTile3;
+	TextureRegion wallTile4;
 	TextureRegion botleftcorner;
+	TextureRegion botrightcorner;
+	TextureRegion topleftcorner;
+	TextureRegion toprightcorner;
 	Animation billWalking;
 	Animation billShootingStart;
 	Animation billShootWalk;
@@ -36,16 +46,29 @@ public class Gone4good extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		items = new Texture("Gone 4 Good.png");
-		background = new Texture("Background.png");
+		background = new Texture("Backgrounds.png");
 		billHud = new TextureRegion(items, 0, 0, 184,184);
 		billHead = new TextureRegion(items, 184, 0, 184, 184);
 		billStanding = new TextureRegion(items, 550, 0, 184, 184);
-		baseTile = new TextureRegion(background, 0, 0, 460, 460);
-		botleftcorner = new TextureRegion(background, 460, 460, 460, 460);
 		billWalking = new Animation(0.2f, new TextureRegion(items, 550, 0, 184, 184), new TextureRegion(items, 736, 0, 184, 184));
 		billShootingStart = new Animation(.02f, new TextureRegion(items, 0, 184, 184, 184), new TextureRegion(items, 184, 184, 184, 184), new TextureRegion(items, 368, 184, 184, 184), new TextureRegion(items, 552, 184, 184, 184));
 		billShootContinue = new Animation(.02f, new TextureRegion(items, 368, 184, 184, 184), new TextureRegion(items, 552, 184, 184, 184));
 		billShootWalk = new Animation(0.2f, new TextureRegion(items, 736, 184, 184, 184), new TextureRegion(items, 0, 368, 184, 184), new TextureRegion(items, 184, 368, 184, 184), new TextureRegion(items, 184, 552, 184, 184));
+		
+		baseTile1 = new TextureRegion(background, 0, 0, 460, 460);
+		baseTile2 = new TextureRegion(background, 0, 0, 460, 460);
+		baseTile3 = new TextureRegion(background, 0, 0, 460, 460);
+		baseTile4 = new TextureRegion(background, 0, 0, 460, 460);
+
+		wallTile1 = new TextureRegion(background, 0, 460, 460, 460);
+		wallTile2 = new TextureRegion(background, 0, 460, 460, 460);
+		wallTile3 = new TextureRegion(background, 0, 460, 460, 460);
+		wallTile4 = new TextureRegion(background, 0, 460, 460, 460);
+
+		botleftcorner = new TextureRegion(background, 460, 460, 460, 460);
+		botrightcorner = new TextureRegion(background, 460, 460, 460, 460);
+		topleftcorner = new TextureRegion(background, 460, 460, 460, 460);
+		toprightcorner = new TextureRegion(background, 460, 460, 460, 460);
 	}
 
 	
@@ -56,7 +79,8 @@ public class Gone4good extends ApplicationAdapter {
 		Gdx.graphics.getWidth();
 		Gdx.graphics.getHeight();
 		batch.draw(botleftcorner, x, y);
-		batch.draw(baseTile, x + 200, y + 200);
+		batch.draw(wallTile, x, y + 420);
+		batch.draw(wallTile, x, y + 840);
 		if (Gdx.input.isKeyPressed(Input.Keys.W)){
 			y -= 10;
 		}
