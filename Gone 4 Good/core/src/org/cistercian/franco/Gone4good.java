@@ -20,6 +20,7 @@ public class Gone4good extends ApplicationAdapter {
 	SpriteBatch batch;
 	OrthographicCamera camera;
 	Texture items;
+	TextureRegion arrow;
 	Texture background;
 	TextureRegion billHud;
 	TextureRegion billHead;
@@ -55,6 +56,8 @@ public class Gone4good extends ApplicationAdapter {
 		billShootContinue = new Animation(.02f, new TextureRegion(items, 368, 184, 184, 184), new TextureRegion(items, 552, 184, 184, 184));
 		billShootWalk = new Animation(0.2f, new TextureRegion(items, 736, 184, 184, 184), new TextureRegion(items, 0, 368, 184, 184), new TextureRegion(items, 184, 368, 184, 184), new TextureRegion(items, 184, 552, 184, 184));
 		
+
+		arrow = new TextureRegion(new Texture("arrow.png"));
 		baseTile1 = new TextureRegion(background, 0, 0, 460, 460);
 		baseTile2 = new TextureRegion(background, 0, 0, 460, 460);
 		baseTile3 = new TextureRegion(background, 0, 0, 460, 460);
@@ -79,8 +82,8 @@ public class Gone4good extends ApplicationAdapter {
 		Gdx.graphics.getWidth();
 		Gdx.graphics.getHeight();
 		batch.draw(botleftcorner, x, y);
-		batch.draw(wallTile, x, y + 420);
-		batch.draw(wallTile, x, y + 840);
+		batch.draw(wallTile1, x, y + 420);
+		batch.draw(wallTile2, x, y + 840);
 		if (Gdx.input.isKeyPressed(Input.Keys.W)){
 			y -= 10;
 		}
@@ -95,11 +98,12 @@ public class Gone4good extends ApplicationAdapter {
 		}
 		batch.draw(billStanding, 875, 450);
 		batch.draw(billHud, 0, 0);
-		int mouseposx = Gdx.input.getX();
-		int mouseposy = Gdx.input.getY();
-		float angle = MathUtils.atan2(825 - mouseposy, mouseposx - 533);
+		int mouseposy = Gdx.input.getX();
+		int mouseposx = Gdx.input.getY();
+		float angle = MathUtils.atan2((825 - mouseposy), (533 - mouseposx));
 		float degrees = (float) (180.0 * angle / Math.PI);
-		batch.draw(billHead, 895, 602, 23,23, 46, 46, 4, 4, degrees);
+		batch.draw(arrow, 600, 600, 0, 0 ,10, 10, 10, 10, degrees);
+		batch.draw(billHead, 895, 602, 0,0, 46, 46, 1, 1, degrees);
 		batch.end();
 	}
 

@@ -9,7 +9,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new Gone4good(), config);
 		config.title = "Gone 4 Good";
-		config.height = 1000;
+		config.height = 100;
 		config.width = 1840;
+		config.fullscreen = true;
 	}
 }
