@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import java.awt.*;
 
@@ -20,7 +21,6 @@ public class Gone4good extends ApplicationAdapter {
 	SpriteBatch batch;
 	OrthographicCamera camera;
 	Texture items;
-	TextureRegion arrow;
 	Texture background;
 	TextureRegion billHud;
 	TextureRegion billHead;
@@ -29,10 +29,10 @@ public class Gone4good extends ApplicationAdapter {
 	TextureRegion baseTile2;
 	TextureRegion baseTile3;
 	TextureRegion baseTile4;
-	TextureRegion wallTile1;
-	TextureRegion wallTile2;
-	TextureRegion wallTile3;
-	TextureRegion wallTile4;
+	TextureRegion leftWallTile;
+	TextureRegion botWallTile;
+	TextureRegion rightWallTile;
+	TextureRegion topWallTile;
 	TextureRegion botleftcorner;
 	TextureRegion botrightcorner;
 	TextureRegion topleftcorner;
@@ -45,11 +45,15 @@ public class Gone4good extends ApplicationAdapter {
 	int y = 0;
 	@Override
 	public void create () {
+		camera = new OrthographicCamera();
+    	camera.setToOrtho(false, 1920, 1080);
+
 		batch = new SpriteBatch();
 		items = new Texture("Gone 4 Good.png");
 		background = new Texture("Backgrounds.png");
 		billHud = new TextureRegion(items, 0, 0, 184,184);
-		billHead = new TextureRegion(items, 184, 0, 184, 184);
+		//billHead = new TextureRegion(items, 184, 0, 184, 184);
+		billHead = new TextureRegion(new Texture("head.png"));
 		billStanding = new TextureRegion(items, 550, 0, 184, 184);
 		billWalking = new Animation(0.2f, new TextureRegion(items, 550, 0, 184, 184), new TextureRegion(items, 736, 0, 184, 184));
 		billShootingStart = new Animation(.02f, new TextureRegion(items, 0, 184, 184, 184), new TextureRegion(items, 184, 184, 184, 184), new TextureRegion(items, 368, 184, 184, 184), new TextureRegion(items, 552, 184, 184, 184));
@@ -57,33 +61,34 @@ public class Gone4good extends ApplicationAdapter {
 		billShootWalk = new Animation(0.2f, new TextureRegion(items, 736, 184, 184, 184), new TextureRegion(items, 0, 368, 184, 184), new TextureRegion(items, 184, 368, 184, 184), new TextureRegion(items, 184, 552, 184, 184));
 		
 
-		arrow = new TextureRegion(new Texture("arrow.png"));
 		baseTile1 = new TextureRegion(background, 0, 0, 460, 460);
 		baseTile2 = new TextureRegion(background, 0, 0, 460, 460);
 		baseTile3 = new TextureRegion(background, 0, 0, 460, 460);
 		baseTile4 = new TextureRegion(background, 0, 0, 460, 460);
 
-		wallTile1 = new TextureRegion(background, 0, 460, 460, 460);
-		wallTile2 = new TextureRegion(background, 0, 460, 460, 460);
-		wallTile3 = new TextureRegion(background, 0, 460, 460, 460);
-		wallTile4 = new TextureRegion(background, 0, 460, 460, 460);
+		leftWallTile = new TextureRegion(background, 1840, 0, 460, 460);
+		botWallTile = new TextureRegion(background, 2300, 0, 460, 460);
+		rightWallTile = new TextureRegion(background, 2760, 0, 460, 460);
+		topWallTile = new TextureRegion(background, 3220, 0, 460, 460);
 
-		botleftcorner = new TextureRegion(background, 460, 460, 460, 460);
-		botrightcorner = new TextureRegion(background, 460, 460, 460, 460);
-		topleftcorner = new TextureRegion(background, 460, 460, 460, 460);
-		toprightcorner = new TextureRegion(background, 460, 460, 460, 460);
+		topleftcorner = new TextureRegion(background, 460, 0, 460, 460);
+		toprightcorner = new TextureRegion(background, 460, 0, 460, 460);
+		botleftcorner = new TextureRegion(background, 4600, 0, 460, 460);
+		botrightcorner = new TextureRegion(background, 460, 0, 460, 460);
 	}
 
 	
 	@Override
 	public void render () {
+		Vector3 touchPos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+		camera.unproject(touchPos);
 		ScreenUtils.clear(1, 0, 0, 1);
 		batch.begin();
 		Gdx.graphics.getWidth();
 		Gdx.graphics.getHeight();
 		batch.draw(botleftcorner, x, y);
-		batch.draw(wallTile1, x, y + 420);
-		batch.draw(wallTile2, x, y + 840);
+		batch.draw(leftWallTile, x, y + 420);
+		batch.draw(botWallTile, x, y + 840);
 		if (Gdx.input.isKeyPressed(Input.Keys.W)){
 			y -= 10;
 		}
@@ -98,12 +103,10 @@ public class Gone4good extends ApplicationAdapter {
 		}
 		batch.draw(billStanding, 875, 450);
 		batch.draw(billHud, 0, 0);
-		int mouseposy = Gdx.input.getX();
-		int mouseposx = Gdx.input.getY();
-		float angle = MathUtils.atan2((825 - mouseposy), (533 - mouseposx));
+		float angle = MathUtils.atan2( ( touchPos.y - 602), (touchPos.x  - 895));
 		float degrees = (float) (180.0 * angle / Math.PI);
-		batch.draw(arrow, 600, 600, 0, 0 ,10, 10, 10, 10, degrees);
-		batch.draw(billHead, 895, 602, 0,0, 46, 46, 1, 1, degrees);
+		batch.draw(topWallTile, touchPos.x, touchPos.y );
+		batch.draw(billHead, 900, 605, 20, 0, 32, 40, 1, 1, degrees);
 		batch.end();
 	}
 
