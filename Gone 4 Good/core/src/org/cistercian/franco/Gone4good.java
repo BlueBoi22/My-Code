@@ -52,7 +52,6 @@ public class Gone4good extends ApplicationAdapter {
 		items = new Texture("Gone 4 Good.png");
 		background = new Texture("Backgrounds.png");
 		billHud = new TextureRegion(items, 0, 0, 184,184);
-		//billHead = new TextureRegion(items, 184, 0, 184, 184);
 		billHead = new TextureRegion(new Texture("head.png"));
 		billStanding = new TextureRegion(items, 550, 0, 184, 184);
 		billWalking = new Animation(0.2f, new TextureRegion(items, 550, 0, 184, 184), new TextureRegion(items, 736, 0, 184, 184));
@@ -68,13 +67,13 @@ public class Gone4good extends ApplicationAdapter {
 
 		leftWallTile = new TextureRegion(background, 1840, 0, 460, 460);
 		botWallTile = new TextureRegion(background, 2300, 0, 460, 460);
-		rightWallTile = new TextureRegion(background, 2760, 0, 460, 460);
+		rightWallTile = new TextureRegion(background, 2860, 0, 460, 460);
 		topWallTile = new TextureRegion(background, 3220, 0, 460, 460);
 
-		topleftcorner = new TextureRegion(background, 460, 0, 460, 460);
-		toprightcorner = new TextureRegion(background, 460, 0, 460, 460);
+		topleftcorner = new TextureRegion(background, 3680, 0, 460, 460);
+		toprightcorner = new TextureRegion(background, 4140, 0, 460, 460);
 		botleftcorner = new TextureRegion(background, 4600, 0, 460, 460);
-		botrightcorner = new TextureRegion(background, 460, 0, 460, 460);
+		botrightcorner = new TextureRegion(background, 5060, 0, 460, 460);
 	}
 
 	
@@ -88,6 +87,11 @@ public class Gone4good extends ApplicationAdapter {
 		Gdx.graphics.getHeight();
 		batch.draw(botleftcorner, x, y);
 		batch.draw(leftWallTile, x, y + 420);
+		batch.draw(botWallTile, x, y + 840);
+		batch.draw(leftWallTile, x, y + 840);
+		batch.draw(leftWallTile, x, y + 420);
+		batch.draw(leftWallTile, x, y + 1260);
+		batch.draw(topleftcorner, x, y + 1680);
 		batch.draw(botWallTile, x, y + 840);
 		if (Gdx.input.isKeyPressed(Input.Keys.W)){
 			y -= 10;
@@ -109,7 +113,6 @@ public class Gone4good extends ApplicationAdapter {
 		batch.draw(billHead, 900, 605, 20, 0, 32, 40, 1, 1, degrees);
 		batch.end();
 	}
-
 	@Override
 	public void dispose () {
 		batch.dispose();
