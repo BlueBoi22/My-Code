@@ -11,10 +11,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.ui.Table.Debug;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import java.awt.*;
+import java.io.Console;
 
 
 public class Gone4good extends ApplicationAdapter {
@@ -41,8 +44,16 @@ public class Gone4good extends ApplicationAdapter {
 	Animation billShootingStart;
 	Animation billShootWalk;
 	Animation billShootContinue;
+	float animationTime = 0;
 	int x = 0;
 	int y = 0;
+
+
+	// new array
+
+	//new animation
+
+	
 	@Override
 	public void create () {
 		camera = new OrthographicCamera();
@@ -79,6 +90,7 @@ public class Gone4good extends ApplicationAdapter {
 	
 	@Override
 	public void render () {
+		animationTime += Gdx.graphics.getDeltaTime();
 		Vector3 touchPos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
 		camera.unproject(touchPos);
 		ScreenUtils.clear(1, 0, 0, 1);
@@ -105,12 +117,14 @@ public class Gone4good extends ApplicationAdapter {
 		else if (Gdx.input.isKeyPressed(Input.Keys.D)){
 			x -= 10;
 		}
-		batch.draw(billStanding, 875, 450);
+		System.out.println(((float) TimeUtils.timeSinceMillis(0)));
+		batch.draw(billWalking.getKeyFrame(animationTime, Animation.ANIMATION_LOOPING), 875, 450);
 		batch.draw(billHud, 0, 0);
 		float angle = MathUtils.atan2( ( touchPos.y - 602), (touchPos.x  - 895));
 		float degrees = (float) (180.0 * angle / Math.PI);
 		batch.draw(topWallTile, touchPos.x, touchPos.y );
 		batch.draw(billHead, 900, 605, 20, 0, 32, 40, 1, 1, degrees);
+		
 		batch.end();
 	}
 	@Override

@@ -16,18 +16,30 @@
 
 package org.cistercian.franco;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Animation {
 	public static final int ANIMATION_LOOPING = 0;
 	public static final int ANIMATION_NONLOOPING = 1;
 
+
+	//public Texture template = new Texture("Gone 4 Good.png");
 	final TextureRegion[] keyFrames;
 	final float frameDuration;
+
+
+
 
 	public Animation (float frameDuration, TextureRegion... keyFrames) {
 		this.frameDuration = frameDuration;
 		this.keyFrames = keyFrames;
+		//
+		//for (int i = 0; i < 5; i++) {
+		//	for (int k = 0; k < 5; k++) {
+		//		keyFrames[5*k + i ] = new TextureRegion()
+		//	}
+		//}
 	}
 
 	public TextureRegion getKeyFrame (float stateTime, int mode) {
